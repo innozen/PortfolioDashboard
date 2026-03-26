@@ -1,0 +1,464 @@
+:root {
+    --bg-color: #f0f4ff;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --border-color: rgba(255, 255, 255, 0.6);
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --accent-color: #4f46e5;
+    --accent-hover: #4338ca;
+    --positive: #059669;
+    --negative: #dc2626;
+    --input-bg: rgba(255, 255, 255, 0.9);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg-color);
+    background-image:
+      radial-gradient(ellipse at 15% 20%, rgba(165, 148, 249, 0.22) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 75%, rgba(99, 102, 241, 0.16) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 50%, rgba(224, 231, 255, 0.35) 0%, transparent 70%);
+    background-attachment: fixed;
+    animation: bgShift 18s ease-in-out infinite alternate;
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes bgShift {
+    0%   { background-position: 0% 0%, 100% 100%, 50% 50%; }
+    50%  { background-position: 10% 20%, 90% 80%, 55% 45%; }
+    100% { background-position: 5% 10%, 95% 90%, 48% 52%; }
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 1300px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Header & Search */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.search-section {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-section input {
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 250px;
+}
+
+.search-section input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+#search-btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#search-btn:hover {
+    background: var(--accent-hover);
+}
+
+#search-btn:active {
+    transform: scale(0.98);
+}
+
+.search-result-card {
+    background: linear-gradient(135deg, rgba(224, 231, 255, 0.6) 0%, rgba(255, 255, 255, 0.8) 100%);
+    padding: 1.5rem;
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 8px 32px rgba(79, 70, 229, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    animation: slideDown 0.3s ease-out;
+}
+
+.search-result-card.hidden {
+    display: none;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.search-result-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-result-header h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.icon-btn {
+    background: rgba(0, 0, 0, 0.03);
+    border: none;
+    color: var(--text-primary);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    transform: scale(1.1);
+}
+
+#add-to-portfolio-btn {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--positive);
+}
+#add-to-portfolio-btn:hover {
+    background: rgba(16, 185, 129, 0.4);
+}
+
+.search-data {
+    display: flex;
+    gap: 2rem;
+}
+
+.data-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.data-item .label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.data-item .value {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+
+/* Common Card Style */
+.card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.card h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+/* Portfolio Table */
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    text-align: right;
+    border-bottom: 1px solid #cbd5e1;
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+tbody tr:hover {
+    background-color: rgba(79, 70, 229, 0.05);
+}
+
+th:first-child, td:first-child {
+    text-align: left;
+}
+
+th {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: rgba(241, 245, 249, 0.8);
+}
+
+td {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.ticker-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ticker-logo {
+    width: 32px;
+    height: 32px;
+    background: var(--input-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    border: 1px solid var(--border-color);
+}
+
+.shares-input {
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem;
+    border-radius: 6px;
+    width: 80px;
+    text-align: right;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.shares-input:focus {
+    border-color: var(--accent-color);
+}
+
+/* Colors for positive/negative */
+.positive {
+    color: var(--positive);
+}
+.positive::before {
+    content: '▲ ';
+    font-size: 0.8em;
+}
+
+.negative {
+    color: var(--negative);
+}
+.negative::before {
+    content: '▼ ';
+    font-size: 0.8em;
+}
+
+/* Loading Overlay */
+.table-card {
+    position: relative;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    z-index: 10;
+    backdrop-filter: blur(4px);
+    color: var(--text-primary);
+}
+
+.loading-overlay.hidden {
+    display: none;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Recent Searches */
+.recent-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.recent-item {
+    background: var(--input-bg);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.recent-item:hover {
+    transform: translateY(-2px);
+    background: rgba(79, 70, 229, 0.05);
+}
+
+.recent-ticker {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--accent-color);
+}
+
+.recent-details {
+    text-align: right;
+}
+
+.recent-price {
+    font-weight: 600;
+}
+
+.recent-yield {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    .search-section {
+        flex-direction: column;
+    }
+    .search-section input {
+        width: 100%;
+    }
+    .search-data {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-end;
+    }
+    
+    /* Table Mobile 2-line Layout */
+    table, thead, tbody, tr { 
+        width: 100%; 
+        display: block; 
+    }
+    
+    thead tr {
+        display: flex;
+        flex-wrap: wrap;
+        border-bottom: 2px solid var(--accent-light);
+    }
+    tbody tr {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #cbd5e1;
+    }
+    
+    th, td {
+        padding: 0.25rem;
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        border-bottom: none;
+        background: transparent !important;
+    }
+    
+    th:first-child, td:first-child { justify-content: flex-start; }
+
+    /* Row 1: Ticker, Shares, Price, Equity */
+    th:nth-child(1), td:nth-child(1) { width: 30%; }
+    th:nth-child(2), td:nth-child(2) { width: 25%; }
+    th:nth-child(3), td:nth-child(3) { width: 20%; }
+    th:nth-child(4), td:nth-child(4) { width: 25%; font-weight: 700; color: var(--accent-color); }
+    
+    /* Row 2: Net Yield, Last Div, Total Div */
+    th:nth-child(5), td:nth-child(5) { width: 33.33%; margin-top: 0.25rem; color: var(--text-secondary); }
+    th:nth-child(6), td:nth-child(6) { width: 33.33%; margin-top: 0.25rem; }
+    th:nth-child(7), td:nth-child(7) { width: 33.33%; margin-top: 0.25rem; font-weight: 700; }
+    
+    .ticker-logo { width: 24px; height: 24px; font-size: 0.7rem; }
+    .shares-input { width: 60px; padding: 0.25rem; font-size: 0.85rem; }
+}
